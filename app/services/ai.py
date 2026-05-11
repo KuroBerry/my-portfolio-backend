@@ -1,12 +1,12 @@
 from openai import AsyncOpenAI
-from app.config import GROQ_API_KEY, GROQ_BASE_URL, CHAT_MODEL
+from app.config import GITHUB_TOKEN, GITHUB_BASE_URL, CHAT_MODEL
 
 
 # ─── AI Client (singleton) ────────────────────────────────────────────────────
 client = AsyncOpenAI(
-    base_url=GROQ_BASE_URL,
-    api_key=GROQ_API_KEY,
-) if GROQ_API_KEY else None
+    base_url=GITHUB_BASE_URL,
+    api_key=GITHUB_TOKEN,
+) if GITHUB_TOKEN else None
 
 
 # ─── System Prompt Builder ────────────────────────────────────────────────────
@@ -126,6 +126,8 @@ async def stream_chat_response(messages: list[dict]):
         )
 
         async for chunk in response:
+            if not chunk.choices:
+                continue
             content = chunk.choices[0].delta.content
             if content:
                 yield content
