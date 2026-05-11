@@ -1,0 +1,204 @@
+{
+  "profile": {
+    "name": "La Nguyen Quoc Thinh",
+    "role": "AI Engineer",
+    "location": "Ho Chi Minh City, Vietnam",
+    "email": "thinhlanguyenquoc@gmail.com",
+    "phone": "0707072966",
+    "linkedin": "https://www.linkedin.com/in/th%E1%BB%8Bnh-la-nguy%E1%BB%85n-qu%E1%BB%91c-532215358/",
+    "github": "github.com/KuroBerry",
+    "about": "AI Engineer specializing in LLM Systems and Hybrid RAG Architecture. I am committed to building deep-tech solutions that go beyond black-box implementations, focusing on high-performance retrieval strategies and production-grade model orchestration. My approach combines rigorous technical understanding with practical problem-solving to deliver reliable AI systems.",
+    "available": true,
+    "cvUrl": "/AIE_LaNguyenQuocThinh.pdf"
+  },
+  "skills": {
+    "Core Strengths": [
+      "Python",
+      "PyTorch",
+      "LLM Systems",
+      "Hybrid RAG Architecture"
+    ],
+    "AI / ML": [
+      "Transformers",
+      "Fine-tuning",
+      "PEFT (LoRA/QLoRA)",
+      "LLM Evaluation",
+      "Prompt Engineering"
+    ],
+    "Retrieval & Data": [
+      "Qdrant",
+      "Pinecone",
+      "Neo4j",
+      "LangChain",
+      "BM25",
+      "SentenceTransformers"
+    ],
+    "Backend & Infra": [
+      "FastAPI",
+      "Docker",
+      "REST APIs",
+      "Git",
+      "Nginx"
+    ],
+    "Data & Foundations": [
+      "Hugging Face",
+      "Scikit-learn",
+      "Matplotlib",
+      "spaCy",
+      "MongoDB"
+    ]
+  },
+  "experiences": [
+    {
+      "company": "FPT Software",
+      "role": "AI Engineer - Internship",
+      "period": "Dec 2025 – Apr 2026",
+      "location": "Ho Chi Minh City, Vietnam",
+      "techStack": [
+        "Python",
+        "FastAPI",
+        "LangChain",
+        "Qdrant",
+        "Neo4j",
+        "Docker",
+        "Nginx"
+      ],
+      "bullets": [
+        "Built a Hybrid Graph RAG system on Japanese software design documents — combining semantic search (Qdrant) to understand function-level meaning and knowledge graph (Neo4j) to capture cross-entity dependencies — enabling detailed impact analysis across technical specs.",
+        "Reduced retrieval context by 75% (20 → 7 chunks) via Cross-Encoder reranking; built Neo4j → Qdrant fallback chain with full logging. Achieved 94% Answer Relevance, 96% Faithfulness (RAGAS) vs. 40% baseline, 40% faster generation",
+        "Automated QA test case generation via Chain-of-Thought & Few-Shot prompting — eliminating manual authoring for covered document types"
+      ],
+      "personalNote": "Bên FPT Software thì tính tới hiện tại (5/2026) thì đây chính là công ty thuần công nghệ đầu tiên mà mình làm. Thời gian bên đây thì cũng có tích cực, cũng có tiêu cực. Nói về dự án trước đi, thì đợt này mình vào 1 team Java .NET. Team mình có nhận 1 dự án manufacturing - dự án chatbot RAG cho các tài liệu thiết kế kỹ thuật. Vấn đề là bên phía khách hàng họ có rất nhiều file excel, bên trong là các mô tả chi tiết các hàm, chức năng của 1 dự án (mà mình không tiện nêu tên do chính sách bảo mật của công ty). Điều kinh khủng nhất mà mình làm ở giai đoạn này đó chính là phải tự đọc và tự dịch các file thiết kế để có thể nắm được nội dung bên trong, đây là điều bắt buộc phải nắm được để có thể xây dựng lược đồ tri thức, và việc xử lý mớ data này nó tốn của mình gần 2 tháng để nắm được hết. Sau 2 tháng thì mình nhận ra là họ chỉ có 3 loại template chính, đó là 1.Batch design - mô tả chi tiết các hàm chức năng, diagram flow của các step khi thực hiện các hàm đó, pattern detail - mô tả chi tiết từng step đó sẽ được thực hiện như thế nào. 2. UI design thì sẽ có các màn hình, chú thích các nút bên trên + Item. 3. Database design, bao gồm các table của dự án + attribute. Sau khi nắm được nội dung, các quan hệ như này thì mình xác định là bài toán này cần thực hiện hết hợp giữa Hybrid Retrieval + Graph Expand, và mình lựa chọn MongoDB + Neo4j. Lí do mà mình chọn phương thức này là khi người dùng họ hỏi tính năng của 1 hàm thì có thể Hybrid retrive (Semantic + Lexical) để ra được thông tin là đủ, nhưng nó không biết được mối liên hệ giữa hàm đó với các hàm khác, nút khác, các thuộc tính khác trong table. Còn khi người dùng hỏi mấy cái như \"nếu tôi xóa nút này đi thì các cái gì sẽ bị ảnh hưởng theo?\" thì nó sẽ bắt được toàn bộ quan hệ liên quan đến nút đó, nhưng đổi lại khi người dùng hỏi hàm ABC thực hiện chức năng gì thì nó khó mà truy hồi đúng (Không thể cứ phục thuộc vào LLM, Text2Cypher được). Nên tôi thực hiện kết hợp cả 2. Khi người dùng hỏi 1 câu thì nó sẽ thực hiện Hybrid Retrieval ra các chunk có vector gần vói query nhất (Số chunk đúng nhất), sau đó các gid (Mỗi 1 chunk chỉ có duy nhất 1 gid được xây dựng bằng rulbase) của các chunk sẽ được map sang Neo4j, tùy vào loại node mà nó sẽ có chiến thuật expand phù hợp. Ví dụ: Khi người dùng hỏi \"Sau khi hàm A thực hiện thì sự kiện gì diễn ra tiếp theo?\" thì nó sẽ Hybrid ra được các chunk gần với 'Hàm A' nhất, sau đó đưa sang Neo4j. Nếu node bên neo4j rơi vào ProcessNode thì nó sẽ expand ra tìm node trước nó, node sau nó, node parent để biết được hàm A thực hiện thì sau đó là gì, nó nằm trong nhánh nào chẳng hạn. Đợt này ngớ 1 cái là bên MongoDB không hỗ trợ Lexical Search nên tôi lại phải mất gần 1 tuần để Migrating từ MongoDB sang Qdrant, sau khi nắm được cấu trúc của mấy file excel thì cũng có 2 cu em .Net Java khá chăm, hỗ trợ tôi trong việc chuyển từ Excel -> Structured Json nên chunking với xây dựng lược đồ tri thức quá khỏe. Đợt thực tập này thì tôi thấy mình học được khá nhiều thứ. Mình biết là sẽ có nhiều bạn đọc review FPT thì đa phần đều khong được review tốt với bảo RUN, nhưng quan điểm của mình thì mình thấy tốt hay không nó sẽ phụ thuộc rất nhiều vào cách mà bạn đón nhận từ những ngày đầu tiên. Ngay từ đầu, thời điển intern mình chỉ quan tâmd dến việc mình sắp được làm những cái mới, học những cái mới, upskill và thời gian thực tập ở đây mình được đáp ứng những điều đó nên mình vô cùng hài lòng. Đúng là khối lượng công việc ở dây rất nặng (gọi dân dã là bị bào đấy), nhưng mà trình mình lên rất là nhiều, nên mình hoàn toàn hài lòng. Về cách đánh giá (evaluation) thì đợt này 3 anh em bu vô chia đống sample data đó ra, xong tạo các cặp câu hỏi trả lời Việt - Anh - Nhật (chụp màn hình mấy cái nội dung liên quan với nhau) rồi ném vào Private GPT để gen, mỗi đứa làm tầm 60-75 cặp. Sau khi eval xong xuôi thì cũng là lúc mình end thực tập, bàn giao lại toàn bộ rồi cút luôn. Sau đó dự án được lên prod hay deploy cụ thể ra sao thì mình cũng không rõ nữa, do không có quyền được biết nữa rồi."
+    },
+    {
+      "company": "Passport Lounge",
+      "role": "AI Engineer – Prompt & Workflow Automation",
+      "period": "Aug 2025 – Oct 2025",
+      "location": "Ho Chi Minh City, Vietnam",
+      "techStack": [
+        "n8n",
+        "Banana Pro",
+        "LLMs",
+        "Web Crawling",
+        "CoT"
+      ],
+      "bullets": [
+        "Built a flight ticketing chatbot with live web crawling to retrieve real-time data — automating 24/7 inquiry handling.",
+        "Designed a CoT-driven pipeline (n8n + Banana Pro) that dynamically generates image prompts from guide photos, tour schedules, and destination context — producing culturally specific marketing visuals without manual design work"
+      ],
+      "personalNote": "Thật ra ở đây công việc của mình chủ yếu làm việc với low code, no code - n8n là chính. Đây là 1 công ty du lịch, không phải thuần IT nên scope của họ tập trung vào việc tối ưu qui trình các thứ. Đợt mình vào làm là trong thời gian ở đây thì mình support họ được 2 dự án. Cái đầu tiên là dự án gen ảnh cho các bạn hướng dẫn viên du lịch. Lúc đó thì yêu cầu là cần 1 cái workflow nhận vào ảnh của 1 bạn hướng dẫn viên, kèm với thông tin của tour đó trong 1 file doc. Thì workflow chính mình làm nó đầu tiên là nhận file đó vô, xong nó sẽ bóc tách các thông tin quan trọng như là địa điểm, thời gian, tên chuyến bay, các hoạt động trong tour. Sau đó các thông tin đó sẽ được đưa vào 1 LLM sử dụng Prompt Engineering CoT (Ví dụ như ở Nhật Bản họ đến Tokyo thì sẽ có các nơi du lịch, địa danh nào; Họ đi vào tháng 9 là mùa đông;...) từ đó sinh ra 1 bộ prompt gen ảnh dùng để đưa qua BananaPro kèm với ảnh của bạn hướng dẫn để sinh ra ảnh. Dự án thứ 2 mà mình làm là 1 workflow crawl vé máy bay từ website Trip.com, xây dựng qua webhook của zalo, dưa query của các bạn sale (Mình cần tìm chuyến bay đến Brazil vào lúc 16h ngày xx/xx, vé 1 chiều, không quá cảnh) thì nó sẽ tách ra các trường như là des; start; time; transit; adutl; child;.... Nếu thiếu thông tin gì thì nó sẽ hỏi lại đến khi đủ thông tin. Tiếp đến các trường đó sẽ được đưa đến 1 hàm javascript để tạo ra đường dẫn đến Trip dạng https://trip.com//ticket?des=bra&..... để cào ra thông tin của các vé available, sau đó đưa qua cho LLM, gen câu trả lời và trả lời cho các bạn sale. Dự án này mình tâm đắc chỗ có cơ chế fall back khi cào web, hồi trước mình dùng 1 con bot có sẵn của n8n là ScraperAI, nhưng nó cần credit với phụ thuộc vào cloud nên mình có build 1 sub-workflow, nếu cào không được thì kích hoạt cái này, nó sẽ bóc html rồi cào thủ công luôn. Ở đây làm việc thì được cái thoải mái cực kỳ, có trả lương khá ổn với vị trí thực tập sinh, anh chị hòa đồng, vui vẻ, nói chung mình là việc ở đây ưng cực kì, chỉ là mình cảm thấy hướng làm n8n - AI Automation kéo thả nó không có hợp với mình lắm, 1 phần là do tính của mình thì mình muốn khi mà làm thì có thể làm sâu, làm kĩ chứ không phải là đưa dữ liệu vào cho blackbox, bản thân mình muốn biết nhiều hơn nữa nên mình mới xin off công việc bên đây để tìm 1 hướng mới phù hợp hơn (Nói thẳng ra là làm lab, làm chuyên sâu thì thích hơn là chỉ làm cho chạy được thôi đấy, chứ làm ra cho dù nó chạy tốt mà mình không hiểu thì mình cũng khó chịu cực kỳ)"
+    }
+  ],
+  "projects": [
+    {
+      "title": "EduRAG",
+      "subtitle": "Personalized AI Learning Assistant",
+      "period": "Aug 2025 – Oct 2025",
+      "techStack": [
+        "FastAPI",
+        "Streamlit",
+        "LangChain",
+        "Gemini API",
+        "Pinecone",
+        "MongoDB",
+        "Docker"
+      ],
+      "description": "An advanced RAG-driven learning ecosystem that enables interactive querying of academic curricula, featuring a personalized 'Knowledge Mapping' module to track and recommend learning paths based on historical interactions.",
+      "highlights": [
+        "Architected end-to-end RAG pipeline with Knowledge Mapping module.",
+        "97.5% accuracy on 200-question benchmark — outperforming GPT-4o (88.8%).",
+        "33.9% response quality improvement compared to rule-based approach (validated via LLM-as-a-Judge)."
+      ],
+      "link": "https://github.com/KuroBerry/EduRAG",
+      "personalNote": "Cái này thì nói thẳng luôn, nó có thể nói là con RAG hữu dụng nhất đối với bản thân mình mà mình từng làm ra =)))) Hồi đó tầm 2024 thì mấy con AI nó không có khôn như giờ đâu, nhất là mấy cái liên quan đến lịch sử, chính trị là tụi nó trả lời đa phần sai hết (Màn toàn là mấy cái sai chí mạng khi làm bài thi, bài học các môn đại cương trên trường ấy), 1 phần mấy này do nó hơi nhạy cảm,với không mang tính khách quan nên bọn AI hồi đấy không được train, thành ra trên trường mình học mấy môn TTHCM, LSD, Triết học nó không có được mượt lắm. Nói thẳng ra mình là 1 đứa cực kì ghét học mấy môn này, chứ ở đó mà kêu mở giáo trình ra để đọc lấy điểm cộng, làm bài, nên thôi đang tình cờ trong kỳ này mình có môn dự án CNTT, mình làm luôn 1 con RAG trên giáo trình 3 môn luôn. Thế là đi lục studocu bla bla các kiểu, lấy được pdf text của 3 môn tái bản hồi 2019. Xong về chunk theo từng header kiểu chương 1, 1 la mã, 1 nhỏ,.. Xưa mình dùng rulebase luôn, dựa trên font-size để xác định header khác nhau để tách ra đấy. Đợt đó mình dùng 2 chiến thuật chunking, 1 cái là chunk theo strucure (header ấy) thánh các chunk lớn, mấy cái chunk nó dài lắm, tràn sạch context window của embedding model luôn nên mình phải đệm thêm cái overlap 300 nữa. Lý do là để lúc băm ra, hai cái chunk liền kề vẫn còn tí liên kết với nhau, chứ không là mất sạch ngữ cảnh giữa chừng thì coi như hỏng. Rồi sau đó ném vào pinecone thôi, cuối cùng là hybrid retrieval rồi gen đáp án. Cách eval thì mình ném từng cái giáo trình vào NotebookLLM, kêu nó gen ra mấy cặp hỏi- trả lời, thêm vài câu trắc nghiệm nữa, kết hợp với QA, trắc nghiệm trên mạng như studoc,... thành 1 tập 200 câu trắc nghiệm, 100 QA cho 3 môn, rồi eval thôi. Sau khi làm xong con RAG đó rồi thì mấy cái homework, trắc nghiệm các thứ mình được 8+, bù qua được cho bài thi cuối kì của mình điểm thấp lắm (Do có học đâu, toàn dùng con RAG mình làm ra thôi hẹ hẹ hẹ =))) ) Về sau để cho hoàn thiện thêm chút để nộp môn dự án CNTT thì tôi thêm cho nó cái lịch sử chat với đề xuất lộ trình học. Thông tin được lưu trong MongoDB thôi, mỗi người dùng thì họ sẽ có 1 cái lịch sử chat riêng, với mỗi môn đại cương sẽ gồm các khái niệm cần hoàn thành. Khi người dùng học xong 1 khái nhiệm thì hệ thống sẽ đánh dấu khái niệm đó là hoàn thành, đề xuất các khái niệm còn lại. Làm sao để biết họ hoàn thành? Sẽ có 1 con LLM đọc lịch sử chat, cách họ đặt câu hỏi với khái niệm, chủ đề đó nếu chủ động, đào sâu thì confirm là nắm được. Và có thể nói đây chính là dự án đầu tiên đưa mình vào 1 level mới theo hướng Integrate AI chứ không còn thuần finetune model xong để đó như hồi trước nữa."
+    },
+    {
+      "title": "Visual Question Answering",
+      "subtitle": "CNN-LSTM Decoder",
+      "period": "Feb 2025 – Apr 2025",
+      "techStack": [
+        "PyTorch",
+        "ResNet50",
+        "LSTM",
+        "Gemini 1.5 Flash",
+        "Kaggle GPU"
+      ],
+      "description": "A sophisticated multimodal reasoning system that bridges Computer Vision and NLP to generate descriptive, full-sentence answers for visual queries, overcoming the limitations of traditional single-word classification models.",
+      "highlights": [
+        "Developed a multimodal VQA model generating full-sentence reasoning answers — moving beyond standard single-word classification outputs.",
+        "Architected a ResNet50 + LSTM encoder-decoder pipeline; automated data augmentation via Gemini 1.5 Flash to expand 9,974 image-question pairs from keyword annotations to rich natural-language.",
+        "Achieved peak BLEU-4 score of 61 at Epoch 36 — a 177% improvement over baseline (22), trained on Kaggle Tesla T4 with AdamW + dynamic LR scheduling + Beam Search decoding."
+      ],
+      "link": "https://github.com/KuroBerry/VQA-CNN-LSTM",
+      "personalNote": "Này thì dó là 1 cái dự án cuối kỳ của môn học DeepLearning trên trường. Lí do tại sao chọn ResNet50 với LSTM vào thời điểm đó? Do đề bài nó yêu cầu thôi =))) Nói chung đợt làm dự án này thì cũng khá căng đấy, VQA thì nhận 1 câu hỏi với 1 cái ảnh rồi trả lời, nhưng đa phần thời điểm đó mấy cái câu trả lời nó thường là 1 chữ thôi à, nó kiểu bài toán classification ấy, nên trước khi đi vào xử lý data thì tôi có cho toàn bộ cặp câu hỏi - trả lời qua Gemini 1.5 flash để nó gen câu trả lời hoàn chỉnh, ví dụ: \"What is on a table? - chessboard\" thì nó sẽ chuyển thành câu hoàn chỉnh: A wooden chessboard is on the table.Đợt đó thì tôi dựa vào cấu trúc của Transformer (Theo bài báo Attention is all you need năm 2017) thì tôi làm phần encoder sẽ có 2 thành phần chính, 1 cái là dùng encode truyền thống đế embed cái query kia vào thành vector 512 chiều, tiếp đến là cái ResNet50 cũng tương tự, sau đó đi qua 1 lớp Flatten để đưa về 512 rồi concat lại, sau đó thực hiện cross attention giữa encoder và decoder (LSTM) thôi."
+    },
+    {
+      "title": "Vietnamese LLM Fine-tuning",
+      "subtitle": "& Evaluation",
+      "period": "Oct 2025 – Nov 2025",
+      "techStack": [
+        "PyTorch",
+        "Hugging Face",
+        "PEFT",
+        "Gemini API",
+        "Pandas"
+      ],
+      "description": "A high-performance Vietnamese language model suite fine-tuned using Parameter-Efficient Fine-Tuning (PEFT) and evaluated through a custom-built 'LLM Arena' blind-test framework to ensure linguistic accuracy and fluency.",
+      "highlights": [
+        "Scaled training corpus 6k → 14k samples via Gemini API augmentation.",
+        "Built LLM Arena (Blind Test) system using Gemini-2.0-Flash-Lite as Judge.",
+        "+2.13% ROUGE-L gain in fluency with only 1.7% classification trade-off."
+      ],
+      "link": "https://github.com/KuroBerry/Vi-LLM-Finetuning",
+      "personalNote": "Chỉ đơn thuần là 1 cái dự án NLP thôi, tìm dataset tiếng việt sai chính tả, dùng LLM để augmented rồi finetune các model dựa trên tập dữ liệu đó, rồi so sánh kết quả giữa có và không có augmented"
+    }
+  ],
+  "education": {
+    "university": "Ton Duc Thang University",
+    "degree": "Bachelor of Science in Computer Science",
+    "period": "2021 – Expected 2026",
+    "location": "Ho Chi Minh City, Vietnam",
+    "coursework": [
+      "Fundamentals of Artificial Intelligence",
+      "Machine Learning",
+      "Deep Learning",
+      "Computer Vision",
+      "Natural Language Processing"
+    ]
+  },
+  "languages": [
+    {
+      "lang": "Vietnamese",
+      "level": "Native",
+      "value": 100
+    },
+    {
+      "lang": "English",
+      "level": "C1 Advanced",
+      "value": 85,
+      "certificateLink": "https://credentials.britishcouncil.org/384a8c97-df48-4169-8c76-c2316e4e24be?key=6c6b3e7ade6176e92bf5df0d774d6c4cd3333a8fb73b0ffbb6ddaed30e6e5d84#acc.uw54sqKm"
+    }
+  ],
+  "personalLife": {
+    "hometown": {
+      "location": "Hóc Môn, TP.HCM",
+      "vibes": "Yên tĩnh, không khí trong lành hơn trung tâm, là nơi lý tưởng để 'chill' sau khi code.",
+      "mustTryFood": [
+        "Về đây thì chắc có cơm sườn Bà Điểm, ăn vặt cô Tuyền thôi."
+      ]
+    },
+    "pets": {
+      "total": 8,
+      "details": "Nuôi 5 con mèo, 3 con chó. mỗi con có tên riêng, con thân nhất là Haku (Mèo), anh lông dài lai cỏ, lông trắng.",
+      "routine": "Tối thì 5 con leo lên ngủ chung với mình, sáng nào cũng bị tụi nó đạp lên đầu kêu dậy cho ăn lúc 6h sáng."
+    },
+    "hobbies": [
+      "Chơi game",
+      "Custom bàn phím, cũng có bán chút chút để đồng ra đồng vô - À nếu bạn đang muốn tìm 1 con phím custom thì cứ ới mình phát nhé :>",
+      "Boxing - Chơi được 3 năm rồi hẹ hẹ"
+    ],
+    "mindset": [
+      "Đang cập nhật"
+    ]
+  }
+}
