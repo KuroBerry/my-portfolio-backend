@@ -50,6 +50,27 @@
   },
   "experiences": [
     {
+      "company": "Neurond AI",
+      "role": "AI Engineer",
+      "period": "Jun 2026 – Current",
+      "location": "Ho Chi Minh City, Vietnam",
+      "techStack": [
+        "Python",
+        "FastAPI",
+        "LangChain",
+        "Qdrant",
+        "Neo4j",
+        "Docker",
+        "Nginx",
+        "TypeScript",
+        "Nextjs"
+      ],
+      "bullets": [
+        "Proficient in AI-Native SDLC: Orchestrated AI Agents for full-stack development by leveraging Spec-Driven methodologies and Harness Automation Testing, shifting focus from manual coding to architectural design and security validation"
+      ],
+      "personalNote": "Chỗ này mới làm được vài ngày thôi, chưa có review gì đâu hẹ hẹ"
+    },
+    {
       "company": "FPT Software",
       "role": "AI Engineer - Internship",
       "period": "Dec 2025 – Apr 2026",
